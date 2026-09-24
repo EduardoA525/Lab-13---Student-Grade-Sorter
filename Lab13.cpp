@@ -40,7 +40,7 @@ struct Student {
 };
 
 //prototypes
-
+void selectSort(Student[], int);
 
 int main() {
 
@@ -53,7 +53,45 @@ int main() {
         return -1;
     }
 
+    //Create student array and add from file
+    Student students[MAX_SIZE];
 
+    int addedStudents = 0;
+    
+    for (int i = 0; i < MAX_SIZE; i++){
+
+        fin >> students[i].ID;
+        fin >> students[i].score;
+        addedStudents++;
+    }
+    fin.close();
+
+    cout << "Read " << addedStudents << " student records." << endl;
 
     return 0;
+}
+
+//Definitions
+
+//Function for selection sort
+void selectSort(Student students[], int addedStudents){
+
+    int min;
+
+    for(int i = 0; i < addedStudents - 1; i++){
+
+        min = i;
+
+        for(int j = i + 1; j < addedStudents; j++){
+
+            if(students[j].ID < students[min].ID) {
+
+                min = j;
+            }
+        }
+
+        Student tempStudent = students[i];
+        students[i] = students[min];
+        students[min] = tempStudent;
+    }
 }
