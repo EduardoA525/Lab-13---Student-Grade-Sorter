@@ -23,3 +23,37 @@ Standard Deviation: 6.48554
 //Eduardo Avila
 //COMSC - 210 - 5293
 //Lab 13 - Student Grade Sorter
+
+#include <iostream>
+#include <fstream>
+#include <iomanip>
+using namespace std;
+
+const int MAX_SIZE = 150;
+const string INPUT_FILE = "210-lab-13-grades.txt";
+const string OUTPUT_FILE = "210-lab-13-grades-sorted.txt";
+
+struct Student {
+
+    int ID;
+    double score;
+};
+
+//prototypes
+
+
+int main() {
+
+    ifstream fin;
+    fin.open(INPUT_FILE);
+
+    //Display error if input file could not be read
+    if(!fin.good()){
+        cout << "Input File could not be opened!" << endl;
+        return -1;
+    }
+
+
+
+    return 0;
+}
