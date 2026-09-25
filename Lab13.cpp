@@ -42,6 +42,7 @@ struct Student {
 //prototypes
 void selectSort(Student[], int);
 void getMinimum(Student[], int, double &, int &);
+void getMaximum(Student[], int, double &, int &);
 
 
 int main() {
@@ -90,14 +91,18 @@ int main() {
 
     cout << "Sorted results written to " << OUTPUT_FILE << endl;
 
-    //Getting minimum score  
+    //Getting score statistics
     double minScore;
     int minID;
+    double maxScore;
+    int maxID;
 
     getMinimum(students, addedStudents, minScore, minID);
+    getMaximum(students, addedStudents, maxScore, maxID);
 
     //test
     cout << minScore << " " << minID << endl;
+    cout << maxScore << " " << maxID << endl;
 
     return 0;
 }
@@ -138,6 +143,21 @@ void getMinimum(Student students[], int addedStudents, double &minScore, int &mi
 
             minScore = students[i].score;
             minID = students[i].ID;
+        }
+    }
+}
+
+//Function for getting the maximum score
+void getMaximum(Student students[], int addedStudents, double &maxScore, int &maxID) {
+
+    maxScore = students[0].score;
+    maxID = students[0].ID;
+
+    for (int i = 1; i < addedStudents; i++) {
+        if(students[i].score > maxScore){
+
+            maxScore = students[i].score;
+            maxID = students[i].ID;
         }
     }
 }
