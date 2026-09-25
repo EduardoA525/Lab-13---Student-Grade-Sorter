@@ -41,6 +41,7 @@ struct Student {
 
 //prototypes
 void selectSort(Student[], int);
+void selectSortScore(Student [], int); //for finding median of score
 void getMinimum(Student[], int, double &, int &);
 void getMaximum(Student[], int, double &, int &);
 double calculateMean(Student[], int);
@@ -103,6 +104,16 @@ int main() {
 
     double mean = calculateMean(students, addedStudents);
 
+    //Separate array of sorted Scores to prevent interference
+    Student studentsScore[MAX_SIZE];
+
+    for (int i = 0; i < addedStudents; i++) {
+        studentsScore[i] = students[i];
+    }
+
+    //Sorts studentsScore by Score instead of ID
+    selectSortScore(studentsScore, addedStudents);
+
     //test
     cout << minScore << " " << minID << endl;
     cout << maxScore << " " << maxID << endl;
@@ -113,7 +124,7 @@ int main() {
 
 //Definitions
 
-//Function for selection sort
+//Function for selection sort by ID
 void selectSort(Student students[], int addedStudents){
 
     int min;
@@ -125,6 +136,29 @@ void selectSort(Student students[], int addedStudents){
         for(int j = i + 1; j < addedStudents; j++){
 
             if(students[j].ID < students[min].ID) {
+
+                min = j;
+            }
+        }
+
+        Student tempStudent = students[i];
+        students[i] = students[min];
+        students[min] = tempStudent;
+    }
+}
+
+//Function for selection sort by score
+void selectSortScore(Student students[], int addedStudents){
+    
+    int min;
+
+    for(int i = 0; i < addedStudents - 1; i++){
+
+        min = i;
+
+        for(int j = i + 1; j < addedStudents; j++){
+
+            if(students[j].score < students[min].score) {
 
                 min = j;
             }
