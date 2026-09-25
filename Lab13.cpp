@@ -43,6 +43,7 @@ struct Student {
 void selectSort(Student[], int);
 void getMinimum(Student[], int, double &, int &);
 void getMaximum(Student[], int, double &, int &);
+double calculateMean(Student[], int);
 
 
 int main() {
@@ -100,9 +101,12 @@ int main() {
     getMinimum(students, addedStudents, minScore, minID);
     getMaximum(students, addedStudents, maxScore, maxID);
 
+    double mean = calculateMean(students, addedStudents);
+
     //test
     cout << minScore << " " << minID << endl;
     cout << maxScore << " " << maxID << endl;
+    cout << mean << endl;
 
     return 0;
 }
@@ -161,3 +165,16 @@ void getMaximum(Student students[], int addedStudents, double &maxScore, int &ma
         }
     }
 }
+
+//Function for calculating the mean
+double calculateMean(Student students[], int addedStudents){
+
+    double addedTotal = 0;
+
+    for (int i = 0; i < addedStudents; i++) {
+        addedTotal += students[i].score;
+    }
+
+    return addedTotal / addedStudents;
+}
+
