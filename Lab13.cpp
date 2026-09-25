@@ -229,13 +229,6 @@ double calculateMedian(Student students[], int addedStudents){
 
     double median = (middleScore1 + middleScore2) / 2;
 
-    //test output
-    for (int i = 0; i < addedStudents; i++) {
-        cout << i + 1 << ". " << studentsScore[i].ID << " "
-             << studentsScore[i].score << endl;
-    }
-
-
     return median;
 }
 
