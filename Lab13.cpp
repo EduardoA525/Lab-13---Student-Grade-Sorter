@@ -67,6 +67,28 @@ int main() {
     fin.close();
 
     cout << "Read " << addedStudents << " student records." << endl;
+    //Sorts data
+    selectSort(students, addedStudents);
+    //Output Time
+    ofstream fout;
+    fout.open(OUTPUT_FILE);
+
+    if(!fout.good()){
+        cout << "Output File could not be opened!" << endl;
+        return -1;
+    }
+
+    //Output sorted results to output file
+    for (int i = 0; i < addedStudents; i++) {
+        fout << students[i].ID << " "
+             << students[i].score << endl;
+    }
+
+    fout.close();
+
+    cout << "Sorted results written to "
+         << OUTPUT_FILE << endl;
+
 
     return 0;
 }
