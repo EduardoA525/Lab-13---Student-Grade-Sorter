@@ -27,6 +27,7 @@ Standard Deviation: 6.48554
 #include <iostream>
 #include <fstream>
 #include <iomanip>
+#include <cmath>
 using namespace std;
 
 const int MAX_SIZE = 150;
@@ -46,6 +47,7 @@ void getMinimum(Student[], int, double &, int &);
 void getMaximum(Student[], int, double &, int &);
 double calculateMean(Student[], int);
 double calculateMedian(Student[], int);
+double calculateDeviation(Student[], int, double);
 
 
 int main() {
@@ -106,12 +108,16 @@ int main() {
     double mean = calculateMean(students, addedStudents);
     double median = calculateMedian(students, addedStudents);
 
+    double deviation = calculateDeviation(students, addedStudents, mean);
+
     //test
     cout << minScore << " " << minID << endl;
     cout << maxScore << " " << maxID << endl;
     cout << mean << endl;
 
     cout << median << " " << endl; //not the right ID
+
+    cout << deviation << endl;
 
 
     return 0;
@@ -232,3 +238,18 @@ double calculateMedian(Student students[], int addedStudents){
     return median;
 }
 
+//Function to find standard deviation
+double calculateDeviation(Student students[], int addedStudents, double mean){
+
+    double sum = 0;
+
+    for(int i = 0; i < addedStudents; i++){
+        double diff = students[i].score - mean;
+        sum += diff * diff;
+    }
+
+    double variance = sum / addedStudents;
+    double deviation = sqrt(variance);
+
+    return deviation;
+}
