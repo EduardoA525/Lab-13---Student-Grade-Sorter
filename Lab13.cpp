@@ -1,13 +1,4 @@
 /*
-Implement a student grade sorter using selection sort. 
-Read student data from the input file into a C++ array of structs. 
-Each struct must contain the student ID and exam score. 
-Sort the array by student ID in ascending order using selection sort, 
-then write the sorted results to an output file. 
-Display statusing in the console along with the summary statistics below.
-*/
-
-/*
 Sample Output
 Read 150 student records
 Sorted results written to 210-lab-13-grades-sorted.txt
@@ -47,6 +38,7 @@ void getMinimum(Student[], int, double &, int &);
 void getMaximum(Student[], int, double &, int &);
 double calculateMean(Student[], int);
 double calculateMedian(Student[], int);
+void getMedianID(Student[], int, double, int &);
 double calculateDeviation(Student[], int, double);
 
 
@@ -60,7 +52,6 @@ int main() {
         cout << "Input File could not be opened!" << endl;
         return -1;
     }
-
     //Create student array and add from file
     Student students[MAX_SIZE];
 
@@ -91,7 +82,6 @@ int main() {
         fout << students[i].ID << " "
              << students[i].score << endl;
     }
-
     fout.close();
 
     cout << "Sorted results written to " << OUTPUT_FILE << endl;
@@ -108,14 +98,17 @@ int main() {
     double mean = calculateMean(students, addedStudents);
     double median = calculateMedian(students, addedStudents);
 
-    double deviation = calculateDeviation(students, addedStudents, mean);
+    int medianID;
+    getMedianID(students, addedStudents, median, medianID); //Associates ID with median
+
+    double deviation = calculateDeviation(students, addedStudents, mean); //Calculates deviation
 
     //test
     cout << minScore << " " << minID << endl;
     cout << maxScore << " " << maxID << endl;
     cout << mean << endl;
 
-    cout << median << " " << endl; //not the right ID
+    cout << median << " " << medianID << endl;
 
     cout << deviation << endl;
 
@@ -236,6 +229,17 @@ double calculateMedian(Student students[], int addedStudents){
     double median = (middleScore1 + middleScore2) / 2;
 
     return median;
+}
+
+//Function for associating ID with the first median score
+void getMedianID(Student students[], int addedStudents, double median, int &medianID)
+{
+    for (int i = 0; i < addedStudents; i++) {
+        if (students[i].score == median) {
+            medianID = students[i].ID;
+            return;
+        }
+    }
 }
 
 //Function to find standard deviation
