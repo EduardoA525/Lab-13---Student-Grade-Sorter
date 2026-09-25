@@ -45,6 +45,7 @@ void selectSortScore(Student [], int); //for finding median of score
 void getMinimum(Student[], int, double &, int &);
 void getMaximum(Student[], int, double &, int &);
 double calculateMean(Student[], int);
+double calculateMedian(Student[], int);
 
 
 int main() {
@@ -103,28 +104,15 @@ int main() {
     getMaximum(students, addedStudents, maxScore, maxID);
 
     double mean = calculateMean(students, addedStudents);
-
-    //Separate array of sorted Scores to prevent interference
-    Student studentsScore[MAX_SIZE];
-
-    for (int i = 0; i < addedStudents; i++) {
-        studentsScore[i] = students[i];
-    }
-
-    //Sorts studentsScore by Score instead of ID
-    selectSortScore(studentsScore, addedStudents);
-
-    //Median calculation test
-    int middle = addedStudents / 2;
-    double median = studentsScore[middle].score;
-    int medianID = studentsScore[middle].ID;
+    double median = calculateMedian(students, addedStudents);
 
     //test
     cout << minScore << " " << minID << endl;
     cout << maxScore << " " << maxID << endl;
     cout << mean << endl;
 
-    cout << median << " " << medianID << endl; //not the right ID
+    cout << median << " " << endl; //not the right ID
+
 
     return 0;
 }
@@ -217,5 +205,37 @@ double calculateMean(Student students[], int addedStudents){
     }
 
     return addedTotal / addedStudents;
+}
+
+//Function for calculating median -- solving the ID grab later
+double calculateMedian(Student students[], int addedStudents){
+
+    //Creates new array for copy sorted by scores
+    Student studentsScore[MAX_SIZE];
+
+    for (int i = 0; i < addedStudents; i++) {
+        studentsScore[i] = students[i];
+    }
+
+    //Sorts by score
+    selectSortScore(studentsScore, addedStudents);
+
+    //Calculates median for even number since there is no real middle
+    int middle1 = addedStudents / 2 - 1;
+    int middle2 = addedStudents / 2;
+
+    double middleScore1 = studentsScore[middle1].score;
+    double middleScore2 = studentsScore[middle2].score;
+
+    double median = (middleScore1 + middleScore2) / 2;
+
+    //test output
+    for (int i = 0; i < addedStudents; i++) {
+        cout << i + 1 << ". " << studentsScore[i].ID << " "
+             << studentsScore[i].score << endl;
+    }
+
+
+    return median;
 }
 
