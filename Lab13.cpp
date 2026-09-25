@@ -114,10 +114,17 @@ int main() {
     //Sorts studentsScore by Score instead of ID
     selectSortScore(studentsScore, addedStudents);
 
+    //Median calculation test
+    int middle = addedStudents / 2;
+    double median = studentsScore[middle].score;
+    int medianID = studentsScore[middle].ID;
+
     //test
     cout << minScore << " " << minID << endl;
     cout << maxScore << " " << maxID << endl;
     cout << mean << endl;
+
+    cout << median << " " << medianID << endl; //not the right ID
 
     return 0;
 }
