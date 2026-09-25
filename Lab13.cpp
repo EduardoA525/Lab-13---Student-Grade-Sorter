@@ -1,23 +1,9 @@
-/*
-Sample Output
-Read 150 student records
-Sorted results written to 210-lab-13-grades-sorted.txt
-
---- Summary Statistics ---
-Minimum Score: 63 (Student ID: 304130512)
-Maximum Score: 93.5 (Student ID: 304355461)
-Mean Score: 80.5333
-Median Score: 80.5 (Student ID: 304367391)
-Standard Deviation: 6.48554
-*/
-
 //Eduardo Avila
 //COMSC - 210 - 5293
 //Lab 13 - Student Grade Sorter
 
 #include <iostream>
 #include <fstream>
-#include <iomanip>
 #include <cmath>
 using namespace std;
 
@@ -40,7 +26,6 @@ double calculateMean(Student[], int);
 double calculateMedian(Student[], int);
 void getMedianID(Student[], int, double, int &);
 double calculateDeviation(Student[], int, double);
-
 
 int main() {
 
@@ -65,7 +50,7 @@ int main() {
     }
     fin.close();
 
-    cout << "Read " << addedStudents << " student records." << endl;
+    cout << "\nRead " << addedStudents << " student records." << endl;
     //Sorts data
     selectSort(students, addedStudents);
     //Output Time
@@ -84,7 +69,7 @@ int main() {
     }
     fout.close();
 
-    cout << "Sorted results written to " << OUTPUT_FILE << endl;
+    cout << "Sorted results written to " << OUTPUT_FILE << "\n" << endl;
 
     //Getting score statistics
     double minScore;
@@ -101,17 +86,15 @@ int main() {
     int medianID;
     getMedianID(students, addedStudents, median, medianID); //Associates ID with median
 
-    double deviation = calculateDeviation(students, addedStudents, mean); //Calculates deviation
+    double deviation = calculateDeviation(students, addedStudents, mean);
 
-    //test
-    cout << minScore << " " << minID << endl;
-    cout << maxScore << " " << maxID << endl;
-    cout << mean << endl;
-
-    cout << median << " " << medianID << endl;
-
-    cout << deviation << endl;
-
+    //Summary Output
+    cout << "--- Summary Statistics ---" << endl;
+    cout << "Minimum Score: " << minScore << " (Student ID: " << minID << ")" << endl;
+    cout << "Maximum Score: " << maxScore << " (Student ID: " << maxID << ")" << endl;
+    cout << "Mean Score: " << mean << endl;
+    cout << "Median Score: " << median << " (Student ID: " << medianID << ")" << endl;
+    cout << "Standard Deviation: " << deviation << endl;
 
     return 0;
 }
