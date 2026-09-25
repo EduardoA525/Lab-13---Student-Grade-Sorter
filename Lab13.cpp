@@ -41,6 +41,8 @@ struct Student {
 
 //prototypes
 void selectSort(Student[], int);
+void getMinimum(Student[], int, double &, int &);
+
 
 int main() {
 
@@ -86,9 +88,16 @@ int main() {
 
     fout.close();
 
-    cout << "Sorted results written to "
-         << OUTPUT_FILE << endl;
+    cout << "Sorted results written to " << OUTPUT_FILE << endl;
 
+    //Getting minimum score  
+    double minScore;
+    int minID;
+
+    getMinimum(students, addedStudents, minScore, minID);
+
+    //test
+    cout << minScore << " " << minID << endl;
 
     return 0;
 }
@@ -115,5 +124,20 @@ void selectSort(Student students[], int addedStudents){
         Student tempStudent = students[i];
         students[i] = students[min];
         students[min] = tempStudent;
+    }
+}
+
+//Function for getting the minimum score
+void getMinimum(Student students[], int addedStudents, double &minScore, int &minID) {
+
+    minScore = students[0].score;
+    minID = students[0].ID;
+
+    for (int i = 1; i < addedStudents; i++) {
+        if(students[i].score < minScore){
+
+            minScore = students[i].score;
+            minID = students[i].ID;
+        }
     }
 }
